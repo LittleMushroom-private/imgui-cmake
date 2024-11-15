@@ -100,7 +100,7 @@ CPMAddPackage(
     GITHUB_REPOSITORY  "ocornut/imgui"
     DOWNLOAD_ONLY
     )
-    
+
 target_sources(${PROJECT_NAME} PRIVATE 
     "${imgui_SOURCE_DIR}/imgui.cpp"
     "${imgui_SOURCE_DIR}/imgui_draw.cpp"
@@ -128,7 +128,7 @@ target_compile_features(imgui PUBLIC cxx_std_20)
 #              CXX_VISIBILITY_PRESET hidden
 #              VISIBILITY_INLINES_HIDDEN YES)
 
-#generate_export_header(imgui EXPORT_FILE_NAME ${PROJECT_BINARY_DIR}/include/imgui/imgui_export.hpp)
+generate_export_header(imgui EXPORT_FILE_NAME ${PROJECT_BINARY_DIR}/include/imgui/imgui_export.hpp)
 
 if(NOT BUILD_SHARED_LIBS)
   target_compile_definitions(imgui PUBLIC imgui_STATIC_DEFINE)
