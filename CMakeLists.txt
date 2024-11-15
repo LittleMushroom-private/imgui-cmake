@@ -82,6 +82,7 @@ add_library(ocornut::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 include(cmake/PreventInSourceBuilds.cmake)
 include(ProjectOptions.cmake)
 include(Dependencies.cmake)
+imgui_global_options()
 imgui_local_options()
 imgui_setup_dependencies()
 
