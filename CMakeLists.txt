@@ -83,6 +83,7 @@ target_compile_features(imgui_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
 add_library(imgui::imgui_options ALIAS imgui_options)
 add_library(imgui::imgui_warnings ALIAS imgui_warnings)
 add_library(${PROJECT_NAME} STATIC)
+# add_library(${PROJECT_NAME} INTERFACE)
 add_library(ocornut::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 #include(cmake/PreventInSourceBuilds.cmake)
@@ -99,6 +100,11 @@ CPMAddPackage(
     GITHUB_REPOSITORY  "ocornut/imgui"
     DOWNLOAD_ONLY
     )
+    
+target_sources(${PROJECT_NAME} PRIVATE 
+    "${imgui_SOURCE_DIR}/imgui.cpp"
+    "${imgui_SOURCE_DIR}/imgui_draw.cpp"
+)
     
 target_include_directories(${PROJECT_NAME} PUBLIC "${imgui_SOURCE_DIR}")
 target_include_directories(${PROJECT_NAME} PUBLIC "${imgui_SOURCE_DIR}/backends")
@@ -137,10 +143,7 @@ endif()
 # Setup sources
 # --------------------------------------------------------------------------------------------------------
 
-target_sources(${PROJECT_NAME} PRIVATE 
-    "${imgui_SOURCE_DIR}/imgui.cpp"
-    "${imgui_SOURCE_DIR}/imgui_draw.cpp"
-)
+
 
 if (imgui_tables)
     target_sources(${PROJECT_NAME} PRIVATE "${imgui_SOURCE_DIR}/imgui_tables.cpp")
