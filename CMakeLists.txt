@@ -165,10 +165,18 @@ if (imgui_platform STREQUAL "GLFW")
     # find_package(glfw3 REQUIRED)
     #https://github.com/glfw/glfw.git
     if(NOT TARGET glfw)
-        cpmaddpackage("gh:glfw/glfw@3.3.10")
+        # cpmaddpackage("gh:glfw/glfw#3.4")
+        CPMAddPackage(
+        NAME               glfw
+        GIT_TAG            3.4
+        GITHUB_REPOSITORY  "glfw/glfw"
+        OPTIONS
+            "GLFW_USE_WAYLAND=1"
+    )
+        
     endif()
     
-    target_link_libraries(${PROJECT_NAME} PUBLIC glfw)
+    target_link_libraries(${PROJECT_NAME} PUBLIC ${GLFW_LIBRARIES})
     target_sources(${PROJECT_NAME} PRIVATE "${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp")
 endif()
 
