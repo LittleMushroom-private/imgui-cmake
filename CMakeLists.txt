@@ -82,7 +82,7 @@ target_compile_features(imgui_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
 
 add_library(imgui::imgui_options ALIAS imgui_options)
 add_library(imgui::imgui_warnings ALIAS imgui_warnings)
-add_library(${PROJECT_NAME} ${TYPE})
+add_library(${PROJECT_NAME} STATIC)
 add_library(ocornut::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 #include(cmake/PreventInSourceBuilds.cmake)
