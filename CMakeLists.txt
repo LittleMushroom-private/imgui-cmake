@@ -122,11 +122,11 @@ target_link_libraries(imgui PRIVATE imgui::imgui_options imgui::imgui_warnings)
 
 target_compile_features(imgui PUBLIC cxx_std_20)
 
-# set_target_properties(
-#   imgui
-#   PROPERTIES VERSION ${PROJECT_VERSION}
-#              CXX_VISIBILITY_PRESET hidden
-#              VISIBILITY_INLINES_HIDDEN YES)
+set_target_properties(
+  imgui
+  PROPERTIES VERSION 1.91.5
+             CXX_VISIBILITY_PRESET hidden
+             VISIBILITY_INLINES_HIDDEN YES)
 
 generate_export_header(imgui EXPORT_FILE_NAME ${PROJECT_BINARY_DIR}/include/imgui/imgui_export.hpp)
 
@@ -268,6 +268,7 @@ include(cmake/PackageProject.cmake)
 # Add other targets that you want installed here, by default we just package the one executable
 # we know we want to ship
 # imgui_package_project(
+#     VERSION 1.91.5
 #   TARGETS
 #   imgui
 #   imgui_options
