@@ -52,11 +52,17 @@ endif()
 
 # # don't know if this should be set globally from here or not...
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-# include(cmake/PreventInSourceBuilds.cmake)
-# include(ProjectOptions.cmake)
 
-# imgui_setup_options()
-# imgui_global_options()#
+include(cmake/PreventInSourceBuilds.cmake)
+include(ProjectOptions.cmake)
+
+imgui_setup_options()
+imgui_global_options()
+
+include(Dependencies.cmake)
+imgui_setup_dependencies()
+
+imgui_local_options()
 
 set(TYPE STATIC)
 if (imgui_shared)
@@ -72,19 +78,19 @@ endif()
 #             8
 #             GIT_SHORT_SHA)
 
-# target_compile_features(imgui_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
+target_compile_features(imgui_options INTERFACE cxx_std_${CMAKE_CXX_STANDARD})
 
-# add_library(imgui::imgui_options ALIAS imgui_options)
-# add_library(imgui::imgui_warnings ALIAS imgui_warnings)
+add_library(imgui::imgui_options ALIAS imgui_options)
+add_library(imgui::imgui_warnings ALIAS imgui_warnings)
 add_library(${PROJECT_NAME} ${TYPE})
 add_library(ocornut::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-include(cmake/PreventInSourceBuilds.cmake)
-include(ProjectOptions.cmake)
-include(Dependencies.cmake)
-imgui_global_options()
-imgui_local_options()
-imgui_setup_dependencies()
+#include(cmake/PreventInSourceBuilds.cmake)
+#include(ProjectOptions.cmake)
+#include(Dependencies.cmake)
+# imgui_global_options()
+# imgui_local_options()
+# imgui_setup_dependencies()
 
 
 CPMAddPackage(
@@ -101,7 +107,7 @@ add_subdirectory(configured_files)
 
 include(GenerateExportHeader)
 
-#target_link_libraries(imgui PRIVATE imgui::imgui_options imgui::imgui_warnings imgui)
+target_link_libraries(imgui PRIVATE imgui::imgui_options imgui::imgui_warnings)
 
 # target_include_directories(imgui ${WARNING_GUARD} 
 # PUBLIC 
@@ -261,8 +267,8 @@ include(cmake/PackageProject.cmake)
 # imgui_package_project(
 #   TARGETS
 #   imgui
-# #  imgui_options
-# #  imgui_warnings
+#   imgui_options
+#   imgui_warnings
 #   # FIXME: this does not work! CK
 #   # PRIVATE_DEPENDENCIES_CONFIGURED project_options project_warnings
 # )
